@@ -144,4 +144,8 @@ public class GestorTurnos {
 		
 	}
 
+	public static void generarMail(){
+
+	}
+
 }
