@@ -28,14 +28,18 @@ import DAO.DaoRecursoTecnologico;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import javax.swing.JCheckBox;
 
 public class PantallaTurnos extends JFrame {
 
@@ -137,7 +141,7 @@ public class PantallaTurnos extends JFrame {
 				String numeroRecurso = (String) modelo.getValueAt(fila,0);
 				DefaultTableModel modelo2 = (DefaultTableModel) grdTurnosRecurso.getModel();
 				int fila2 = grdRecursosTecnologicos.getSelectedRow();
-				String fechaTurno = (String) modelo.getValueAt(fila2,1);
+				String fechaTurno = (String) modelo2.getValueAt(fila2,1);
 				
 				
 				GestorTurnos.turnoSeleccionado(numeroRecurso,fechaTurno);
@@ -163,22 +167,30 @@ public class PantallaTurnos extends JFrame {
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setBounds(10, 32, 133, 14);
 		contentPane.add(lblNewLabel_3);
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("Notificar Por Email");
+		chckbxNewCheckBox.setSelected(true);
+		chckbxNewCheckBox.setBounds(670, 428, 133, 23);
+		contentPane.add(chckbxNewCheckBox);
+		
+		JCheckBox chckbxNotificarPorWhatsapp = new JCheckBox("Notificar Por WhatsApp");
+		chckbxNotificarPorWhatsapp.setBounds(511, 428, 148, 23);
+		contentPane.add(chckbxNotificarPorWhatsapp);
 	}
 
 	public static void pedirSeleccionTurnos(String[][] turnosDisponibles) {
 		DefaultTableModel modelo = (DefaultTableModel) grdTurnosRecurso.getModel();
 		modelo.setRowCount(0);
 		int fila = 0;
-
 		for (int i = 0; i < turnosDisponibles.length; i++) {
 			if (turnosDisponibles[i][0] == null) {
 			} else {
+				
 				modelo.addRow(new Vector());
 				modelo.setValueAt(turnosDisponibles[i][0], fila, 0);
 				modelo.setValueAt(turnosDisponibles[i][1], fila, 1);
 				modelo.setValueAt(turnosDisponibles[i][2], fila, 2);
-				((DefaultTableCellRenderer) grdTurnosRecurso.getTableHeader().getDefaultRenderer())
-						.setHorizontalAlignment(SwingConstants.LEFT);
+				((DefaultTableCellRenderer) grdTurnosRecurso.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.LEFT);
 				fila++;
 			}
 
@@ -200,4 +212,14 @@ public class PantallaTurnos extends JFrame {
 		}
 	}
 
+	public static void PedirConfirmacion(String numeroRecurso, String fechaTurno) {
+		String mensaje = "¿Está seguro que desea Reservar el recurso n° "+numeroRecurso+" para el turno: "+fechaTurno+"?";   
+		if (JOptionPane.showConfirmDialog(null, mensaje, "WARNING",
+		        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+		    GestorTurnos.reservarRT(numeroRecurso,fechaTurno);
+		} else {
+
+		}	
+		
+	}
 }

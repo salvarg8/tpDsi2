@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import ENTIDADES.AsignacionDelCientificoDelCI;
+import ENTIDADES.AsignacionCientifico;
 import ENTIDADES.CambioEstadoRT;
 import ENTIDADES.CambioEstadoTurno;
 import ENTIDADES.CategoriaRecursoTecnologico;
@@ -21,12 +21,14 @@ public class DaoDatos {
 	private static boolean arrayCargado = false;
 
 	static Date fecha = new Date(System.currentTimeMillis());
-	
-	private static Estado estado9 = new Estado("Disponible");
-	private static Estado estado8 = new Estado("Reservado");
+	private static ArrayList<Estado> estados =new ArrayList<Estado>();
+
+	private static Estado estado9 = new Estado("Disponible","Turno");
+	private static Estado estado8 = new Estado("Reservado","Turno");
 	
 	private static 	CambioEstadoTurno cambioEstadoTurno1 = new CambioEstadoTurno(fecha, estado9);
 	private static CambioEstadoTurno cambioEstadoTurno2 = new CambioEstadoTurno(fecha, estado8);
+	
 	private static ArrayList<CambioEstadoTurno> cambiosTurnos1 =new ArrayList<CambioEstadoTurno>();
 	private static ArrayList<CambioEstadoTurno> cambiosTurnos2 =new ArrayList<CambioEstadoTurno>();
 	
@@ -34,25 +36,25 @@ public class DaoDatos {
 	
 	
 	private static ArrayList<Turno> turnos = new ArrayList<Turno>();
-	private static Turno turno1 = new Turno(fecha, 0, sumarHorasFecha(fecha, 0, 0), sumarHorasFecha(fecha, 0, 5),cambiosTurnos1);
-	private static Turno turno2 = new Turno(fecha, 0, sumarHorasFecha(fecha, 0, 5), sumarHorasFecha(fecha, 0, 10),cambiosTurnos1);
-	private static Turno turno3 = new Turno(fecha, 1, sumarHorasFecha(fecha, 1, 0), sumarHorasFecha(fecha, 1, 5),cambiosTurnos2);
+	private static Turno turno1 = new Turno(fecha, 0, sumarHorasFecha(fecha, 0, 0), sumarHorasFecha(fecha, 0, 5),cambiosTurnos2);
+	private static Turno turno2 = new Turno(fecha, 0, sumarHorasFecha(fecha, 0, 5), sumarHorasFecha(fecha, 0, 10),cambiosTurnos2);
+	private static Turno turno3 = new Turno(fecha, 1, sumarHorasFecha(fecha, 1, 0), sumarHorasFecha(fecha, 1, 5),cambiosTurnos1);
 	private static Turno turno4 = new Turno(fecha, 1, sumarHorasFecha(fecha, 1, 5), sumarHorasFecha(fecha, 1, 10),cambiosTurnos1);
-	private static Turno turno5 = new Turno(fecha, 2, sumarHorasFecha(fecha, 2, 0), sumarHorasFecha(fecha, 2, 5),cambiosTurnos2);
+	private static Turno turno5 = new Turno(fecha, 2, sumarHorasFecha(fecha, 2, 0), sumarHorasFecha(fecha, 2, 5),cambiosTurnos1);
 	private static Turno turno6 = new Turno(fecha, 2, sumarHorasFecha(fecha, 2, 5), sumarHorasFecha(fecha, 2, 10),cambiosTurnos1);
-	private static Turno turno7 = new Turno(fecha, 3, sumarHorasFecha(fecha, 3, 0), sumarHorasFecha(fecha, 3, 5),cambiosTurnos1);
-	private static Turno turno8 = new Turno(fecha, 3, sumarHorasFecha(fecha, 3, 5), sumarHorasFecha(fecha, 3, 10),cambiosTurnos1);
-	private static Turno turno9 = new Turno(fecha, 4, sumarHorasFecha(fecha, 4, 0), sumarHorasFecha(fecha, 4, 5),cambiosTurnos2);
+	private static Turno turno7 = new Turno(fecha, 3, sumarHorasFecha(fecha, 3, 0), sumarHorasFecha(fecha, 3, 5),cambiosTurnos2);
+	private static Turno turno8 = new Turno(fecha, 3, sumarHorasFecha(fecha, 3, 5), sumarHorasFecha(fecha, 3, 10),cambiosTurnos2);
+	private static Turno turno9 = new Turno(fecha, 4, sumarHorasFecha(fecha, 4, 0), sumarHorasFecha(fecha, 4, 5),cambiosTurnos1);
 	private static Turno turno10 = new Turno(fecha, 4, sumarHorasFecha(fecha, 4, 5), sumarHorasFecha(fecha, 4, 10),cambiosTurnos2);
 	private static Turno turno11 = new Turno(fecha, 5, sumarHorasFecha(fecha, 5, 0), sumarHorasFecha(fecha, 5, 5),cambiosTurnos2);
-	private static Turno turno12 = new Turno(fecha, 5, sumarHorasFecha(fecha, 5, 5), sumarHorasFecha(fecha, 5, 10),cambiosTurnos1);
+	private static Turno turno12 = new Turno(fecha, 5, sumarHorasFecha(fecha, 5, 5), sumarHorasFecha(fecha, 5, 10),cambiosTurnos2);
 	private static Turno turno13 = new Turno(fecha, 6, sumarHorasFecha(fecha, 6, 0), sumarHorasFecha(fecha, 6, 5),cambiosTurnos1);
-	private static Turno turno14 = new Turno(fecha, 6, sumarHorasFecha(fecha, 6, 5), sumarHorasFecha(fecha, 6, 10),cambiosTurnos1);
+	private static Turno turno14 = new Turno(fecha, 6, sumarHorasFecha(fecha, 6, 5), sumarHorasFecha(fecha, 6, 10),cambiosTurnos2);
 
-	private static ArrayList<AsignacionDelCientificoDelCI> asignaciones1 = new ArrayList<AsignacionDelCientificoDelCI>();
-	private static ArrayList<AsignacionDelCientificoDelCI> asignaciones2 = new ArrayList<AsignacionDelCientificoDelCI>();
-	private static ArrayList<AsignacionDelCientificoDelCI> asignaciones3 = new ArrayList<AsignacionDelCientificoDelCI>();
-	private static ArrayList<AsignacionDelCientificoDelCI> asignaciones4 = new ArrayList<AsignacionDelCientificoDelCI>();
+	private static ArrayList<AsignacionCientifico> asignaciones1 = new ArrayList<AsignacionCientifico>();
+	private static ArrayList<AsignacionCientifico> asignaciones2 = new ArrayList<AsignacionCientifico>();
+	private static ArrayList<AsignacionCientifico> asignaciones3 = new ArrayList<AsignacionCientifico>();
+	private static ArrayList<AsignacionCientifico> asignaciones4 = new ArrayList<AsignacionCientifico>();
 
 	// Usuarios
 	private static Usuario usuario1 = new Usuario("admin", "asd123", true);
@@ -64,7 +66,7 @@ public class DaoDatos {
 
 	// PersonalCientifico
 	private static PersonalCientifico cientifico1 = new PersonalCientifico(123123, "cientifico1", "apellido", 123123,
-			"cientifico1@institucional.edu", "cientifico1@gmail.com", "1231232444", usuario1);
+			"cientifico1@institucional.edu", "salvadorrodriguezgarraza@gmail.com", "1231232444", usuario1);
 	private static PersonalCientifico cientifico2 = new PersonalCientifico(123123, "cientifico2", "apellido", 123123,
 			"cientifico2@institucional.edu", "cientifico2@gmail.com", "1231232444", usuario2);
 	private static PersonalCientifico cientifico3 = new PersonalCientifico(123123, "cientifico3", "apellido", 123123,
@@ -82,12 +84,12 @@ public class DaoDatos {
 	
 	
 	// Asignaciones
-	static AsignacionDelCientificoDelCI asignacion1 = new AsignacionDelCientificoDelCI(fecha, cientifico1);
-	static AsignacionDelCientificoDelCI asignacion2 = new AsignacionDelCientificoDelCI(fecha, cientifico2);
-	static AsignacionDelCientificoDelCI asignacion3 = new AsignacionDelCientificoDelCI(fecha, cientifico3);
-	static AsignacionDelCientificoDelCI asignacion4 = new AsignacionDelCientificoDelCI(fecha, cientifico4);
-	static AsignacionDelCientificoDelCI asignacion5 = new AsignacionDelCientificoDelCI(fecha, cientifico5);
-	static AsignacionDelCientificoDelCI asignacion6 = new AsignacionDelCientificoDelCI(fecha, cientifico6);
+	static AsignacionCientifico asignacion1 = new AsignacionCientifico(fecha, cientifico1);
+	static AsignacionCientifico asignacion2 = new AsignacionCientifico(fecha, cientifico2);
+	static AsignacionCientifico asignacion3 = new AsignacionCientifico(fecha, cientifico3);
+	static AsignacionCientifico asignacion4 = new AsignacionCientifico(fecha, cientifico4);
+	static AsignacionCientifico asignacion5 = new AsignacionCientifico(fecha, cientifico5);
+	static AsignacionCientifico asignacion6 = new AsignacionCientifico(fecha, cientifico6);
 
 	// Centros de investigacion
 	private static ArrayList<RecursoTecnologico> recursos1 = new ArrayList<RecursoTecnologico>();
@@ -139,9 +141,9 @@ public class DaoDatos {
 	private static CategoriaRecursoTecnologico cat5 = new CategoriaRecursoTecnologico("categoria4", "asd");
 	private static CategoriaRecursoTecnologico cat6 = new CategoriaRecursoTecnologico("categoria5", "asd");
 	// estado
-	private static Estado estado = new Estado("Disponible");
-	private static Estado estado2 = new Estado("En Mantenimiento");
-	private static Estado estado3 = new Estado("Mantenimiento Correctivo");
+	private static Estado estado = new Estado("Disponible","Recurso Tecnologico");
+	private static Estado estado2 = new Estado("En Mantenimiento","Recurso Tecnologico");
+	private static Estado estado3 = new Estado("Mantenimiento Correctivo","Recurso Tecnologico");
 
 	// Cambio de estado
 	private static CambioEstadoRT cambio = new CambioEstadoRT(estado, fecha);
@@ -202,6 +204,9 @@ public class DaoDatos {
 	private static void llenarArray() {
 		if (arrayCargado == false) {
 
+			cambiosTurnos1.add(cambioEstadoTurno1);
+			cambiosTurnos2.add(cambioEstadoTurno2);
+			
 			turnos.add(turno1);
 			turnos.add(turno2);
 			turnos.add(turno3);
@@ -305,11 +310,22 @@ public class DaoDatos {
 			tipoRecursoTecnologico.add(cat5);
 			tipoRecursoTecnologico.add(cat6);
 
-			cambiosTurnos1.add(cambioEstadoTurno1);
-			cambiosTurnos2.add(cambioEstadoTurno2);
+
+			
+			estados.add(estado);
+			estados.add(estado2);
+			estados.add(estado3);
+			estados.add(estado8);
+			estados.add(estado9);
+			
+			
 			
 			
 			arrayCargado = true;
+			
+			
+			
+			
 		}
 
 	}
@@ -376,5 +392,10 @@ public class DaoDatos {
 		calendar.add(Calendar.DAY_OF_YEAR, dias);
 		calendar.add(Calendar.HOUR, horas);
 		return calendar.getTime();
+	}
+
+	public static ArrayList<Estado> getEstados() {
+		llenarArray();
+		return estados;
 	}
 }

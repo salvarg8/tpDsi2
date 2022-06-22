@@ -24,7 +24,7 @@ public class CentroDeInvestigacion {
 	private Date fechaBaja;
 	private String motivoBaja;
 	private ArrayList<AsignacionDirectorCI> directoriDelCI;
-	private ArrayList<AsignacionDelCientificoDelCI> cientificos;
+	private ArrayList<AsignacionCientifico> cientificos;
 	private ArrayList<RecursoTecnologico> recursosTecnologicos;
 	
 	//GETTERS AND SETTERS
@@ -33,7 +33,7 @@ public class CentroDeInvestigacion {
 	public CentroDeInvestigacion(String nombre, String sigla, String direccion, String edificio, String piso,
 			String coordenadas, String telefonosContacto, String correoElectronico, int numeroResolucionCreacion,
 			Date fechaResolucionCreacion, String reglamento, String caracteristicasGenerales, Date fechaAlta,
-			int tiempoAntelacionReserva, ArrayList<RecursoTecnologico> recursosTecnologicos, ArrayList<AsignacionDelCientificoDelCI> cientificos) {
+			int tiempoAntelacionReserva, ArrayList<RecursoTecnologico> recursosTecnologicos, ArrayList<AsignacionCientifico> cientificos) {
 		this.nombre = nombre;
 		this.sigla = sigla;
 		this.direccion = direccion;
@@ -157,10 +157,10 @@ public class CentroDeInvestigacion {
 	public void setDirectoriDelCI(ArrayList<AsignacionDirectorCI> directoriDelCI) {
 		this.directoriDelCI = directoriDelCI;
 	}
-	public ArrayList<AsignacionDelCientificoDelCI> getCientificos() {
+	public ArrayList<AsignacionCientifico> getCientificos() {
 		return cientificos;
 	}
-	public void setCientificos(ArrayList<AsignacionDelCientificoDelCI> cientificos) {
+	public void setCientificos(ArrayList<AsignacionCientifico> cientificos) {
 		this.cientificos = cientificos;
 	}
 	public ArrayList<RecursoTecnologico> getRecursosTecnologicos() {
@@ -182,11 +182,21 @@ public class CentroDeInvestigacion {
 	}
 	public boolean esTuCientifico(PersonalCientifico cientifico) {
 		
-		for (AsignacionDelCientificoDelCI pCientifico: cientificos) {
+		for (AsignacionCientifico pCientifico: cientificos) {
 			if(pCientifico.getPersonalCientifico().equals(cientifico))
 				return true;
 		}
 		return false;
+		
+	}
+
+	public void asignarTurno(PersonalCientifico cientifico, Turno turnoSeleccionado) {
+		for (AsignacionCientifico asignacionCientifico : cientificos) {
+			if(asignacionCientifico.getPersonalCientifico().equals(cientifico)) {
+				asignacionCientifico.setTurno(turnoSeleccionado);
+			}
+		}
+		
 		
 	}
 

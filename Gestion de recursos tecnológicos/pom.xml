@@ -10,6 +10,28 @@
 			<artifactId>mssql-jdbc</artifactId>
 			<version>10.2.0.jre11</version>
 		</dependency>
+
+
+		<dependency>
+			<groupId>com.sanctionco.jmail</groupId>
+			<artifactId>jmail</artifactId>
+			<version>1.4.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.simplejavamail</groupId>
+			<artifactId>simple-java-mail</artifactId>
+			<version>5.0.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/jakarta.platform/jakarta.jakartaee-api -->
+<dependency>
+    <groupId>jakarta.platform</groupId>
+    <artifactId>jakarta.jakartaee-api</artifactId>
+    <version>8.0.0</version>
+    <scope>provided</scope>
+</dependency>
+		
+
 	</dependencies>
 
 </project>

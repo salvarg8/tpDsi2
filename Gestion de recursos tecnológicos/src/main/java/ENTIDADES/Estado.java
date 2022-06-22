@@ -12,10 +12,12 @@ public class Estado {
 		
 	}
 	
-	public Estado(String nombre) {
+	public Estado(String nombre,String ambito) {
 		this.nombre = nombre;
+		this.ambito = ambito;
 		this.esReservable = true;
 		this.esCancelable = false;
+
 	}
 	//GETTERS AND SETTERS
 
@@ -49,6 +51,18 @@ public class Estado {
 	}
 	public boolean esReservable() {
 		return this.esReservable;
+	}
+
+	public boolean esAmbito(String amb) {
+		if (ambito == amb)
+			return true;
+		return false;
+	}
+
+	public boolean esReservado() {
+		if (nombre == "Reservado")
+			return true;
+		return false;
 	}
 	
    

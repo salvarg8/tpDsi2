@@ -3,7 +3,7 @@ package DAO;
 import java.sql.Date;
 import java.util.ArrayList;
 
-import ENTIDADES.AsignacionDelCientificoDelCI;
+import ENTIDADES.AsignacionCientifico;
 import ENTIDADES.CentroDeInvestigacion;
 import ENTIDADES.PersonalCientifico;
 import ENTIDADES.RecursoTecnologico;
@@ -30,17 +30,17 @@ public class DaoCentroInvestigacion {
 	private static PersonalCientifico cientifico6 = new PersonalCientifico(123123,"cientifico6","apellido",123123,"cientifico6@institucional.edu","cientifico6@gmail.com","1231232444",usuario6);
 	
 	
-	private static ArrayList<AsignacionDelCientificoDelCI> asignaciones1 = new ArrayList<AsignacionDelCientificoDelCI>();
-	private static ArrayList<AsignacionDelCientificoDelCI> asignaciones2 = new ArrayList<AsignacionDelCientificoDelCI>();
-	private static ArrayList<AsignacionDelCientificoDelCI> asignaciones3 = new ArrayList<AsignacionDelCientificoDelCI>();
-	private static ArrayList<AsignacionDelCientificoDelCI> asignaciones4 = new ArrayList<AsignacionDelCientificoDelCI>();
+	private static ArrayList<AsignacionCientifico> asignaciones1 = new ArrayList<AsignacionCientifico>();
+	private static ArrayList<AsignacionCientifico> asignaciones2 = new ArrayList<AsignacionCientifico>();
+	private static ArrayList<AsignacionCientifico> asignaciones3 = new ArrayList<AsignacionCientifico>();
+	private static ArrayList<AsignacionCientifico> asignaciones4 = new ArrayList<AsignacionCientifico>();
 
-	static AsignacionDelCientificoDelCI asignacion1 = new AsignacionDelCientificoDelCI(fecha, cientifico1);
-	static AsignacionDelCientificoDelCI asignacion2 = new AsignacionDelCientificoDelCI(fecha, cientifico2);
-	static AsignacionDelCientificoDelCI asignacion3 = new AsignacionDelCientificoDelCI(fecha, cientifico3);
-	static AsignacionDelCientificoDelCI asignacion4 = new AsignacionDelCientificoDelCI(fecha, cientifico4);
-	static AsignacionDelCientificoDelCI asignacion5 = new AsignacionDelCientificoDelCI(fecha, cientifico5);
-	static AsignacionDelCientificoDelCI asignacion6 = new AsignacionDelCientificoDelCI(fecha, cientifico6);
+	static AsignacionCientifico asignacion1 = new AsignacionCientifico(fecha, cientifico1);
+	static AsignacionCientifico asignacion2 = new AsignacionCientifico(fecha, cientifico2);
+	static AsignacionCientifico asignacion3 = new AsignacionCientifico(fecha, cientifico3);
+	static AsignacionCientifico asignacion4 = new AsignacionCientifico(fecha, cientifico4);
+	static AsignacionCientifico asignacion5 = new AsignacionCientifico(fecha, cientifico5);
+	static AsignacionCientifico asignacion6 = new AsignacionCientifico(fecha, cientifico6);
 
 	
 	private static ArrayList<CentroDeInvestigacion> centros = new ArrayList<CentroDeInvestigacion>();

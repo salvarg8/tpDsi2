@@ -3,19 +3,21 @@ package ENTIDADES;
 import java.sql.Date;
 import java.util.ArrayList;
 
-public class AsignacionDelCientificoDelCI {
+public class AsignacionCientifico {
 
 	private Date fechaDesde;
 	private Date fechaHasta;
 	private PersonalCientifico personalCientifico;
+	private ArrayList<Turno> turnos;
 	
 	
 	 
 	
-	public AsignacionDelCientificoDelCI(Date fechaDesde, PersonalCientifico personalCientifico) {
+	public AsignacionCientifico(Date fechaDesde, PersonalCientifico personalCientifico) {
 		super();
 		this.fechaDesde = fechaDesde;
 		this.personalCientifico = personalCientifico;
+		turnos = new ArrayList<Turno>();
 	}
 	//GETTERS AND SETTERS
 	public Date getFechaDesde() {
@@ -35,6 +37,10 @@ public class AsignacionDelCientificoDelCI {
 	}
 	public void setPersonalCientifico(PersonalCientifico personalCientifico) {
 		this.personalCientifico = personalCientifico;
+	}
+	public void setTurno(Turno turno) {
+		turnos.add(turno);
+		
 	}
 
 	

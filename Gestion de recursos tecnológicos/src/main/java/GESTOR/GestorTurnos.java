@@ -6,12 +6,18 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.swing.JOptionPane;
+
+import DAO.DaoEstados;
 import DAO.DaoRecursoTecnologico;
 import DAO.DaoTipoRecursos;
 import ENTIDADES.RecursoTecnologico;
 import ENTIDADES.Turno;
 import GUI.PantallaTurnos;
+import ENTIDADES.CambioEstadoTurno;
 import ENTIDADES.CategoriaRecursoTecnologico;
+import ENTIDADES.EmailSenderService;
+import ENTIDADES.Estado;
 import ENTIDADES.PersonalCientifico;
 
 
@@ -114,7 +120,7 @@ public class GestorTurnos {
 					if((a.compareTo(b))> 0) {
 						String[] provisorio = new String[3];
 						provisorio = turnosDisponibles[i];
-						turnosDisponibles[j] = turnosDisponibles[i];
+						turnosDisponibles[i] = turnosDisponibles[j];
 						turnosDisponibles[j] = provisorio;
 					}	
 				}
@@ -140,8 +146,45 @@ public class GestorTurnos {
 	}
 
 	public static void turnoSeleccionado(String numeroRecurso, String fechaTurno) {
-		// TODO Auto-generated method stub
+		PantallaTurnos.PedirConfirmacion(numeroRecurso,fechaTurno);
+	}
+
+	public static void reservarRT(String numeroRecurso, String fechaTurno) {
+		
+		
+		Turno turnoSeleccionado = new Turno();;
+
+		RecursoTecnologico reservado = DaoRecursoTecnologico.getRecursoTecnologicoPorId(Integer.parseInt(numeroRecurso));
+		ArrayList<Turno> turnos = reservado.getTurnos();
+		for (Turno turno : turnos) {
+			if (turno.getFechaHoraInicio().equals(fechaTurno))
+			{
+				turnoSeleccionado = turno;
+				break;
+			}
+			
+		}
+		ArrayList<Estado> estados = DaoEstados.getEstados();
+		for (Estado estado : estados) {
+			if (estado.esAmbito("Turno"))
+				if(estado.esReservado()) {
+					turnoSeleccionado.reservar(estado);
+					break;
+				}
+					
+		}
+		PersonalCientifico cientifico = ActualSesion.obtenerCientificoLogeado();
+		reservado.asignarTurno(cientifico, turnoSeleccionado);
+		
+		generarMail(cientifico,numeroRecurso, fechaTurno);
 		
 	}
+
+	private static void generarMail(PersonalCientifico personalCientifico, String numeroRecurso, String fechaTurno) {
+		String correo = personalCientifico.getCorreoElectronicoPersonal();
+		String asunto = "Reserva de turno";
+		String mensaje ="Se realizó una reserva para el recurso numero "+numeroRecurso+"el día :"+fechaTurno;
+		EmailSenderService.enviarMail(correo,asunto,mensaje);
+	}	
 
 }

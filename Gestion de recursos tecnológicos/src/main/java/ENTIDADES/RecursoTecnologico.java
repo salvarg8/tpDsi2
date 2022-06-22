@@ -188,14 +188,20 @@ public class RecursoTecnologico {
 		return false;
 	}
 
+	public void setTurnos(ArrayList<Turno> turnos) {
+		this.turnos = turnos;
+	}
+
 	public ArrayList<Turno> getTurnos() {
 		return turnos;
 	}
 
 	public String[][] misTurnosDisponibles(Date fechaHoraActual) {
 		String[][] turnosDisponibles = new String[turnos.size()][3];
+		
 		for (int i = 0; i < turnos.size(); i++) {
 			if (turnos.get(i).esFechaHoraActual(fechaHoraActual) == true) {
+				
 				String inicio = turnos.get(i).getFechaHoraInicio().toString();
 				String fin = turnos.get(i).getFechaHoraFin().toString();
 				for (int j = 0; j < turnos.get(i).getCambiosEstadoTurnos().size(); j++) {
@@ -205,7 +211,6 @@ public class RecursoTecnologico {
 						turnosDisponibles[i][0] = nom;
 						turnosDisponibles[i][1] = inicio;
 						turnosDisponibles[i][2] = fin;
-						break;
 					}
 				}
 
@@ -213,5 +218,10 @@ public class RecursoTecnologico {
 			
 		}
 		return turnosDisponibles;
+	}
+
+	public void asignarTurno(PersonalCientifico cientifico, Turno turnoSeleccionado) {
+		CentroDeInvestigacion centro = obtenerCentroInvestigacion();
+		centro.asignarTurno(cientifico,turnoSeleccionado);
 	}
 }
